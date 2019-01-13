@@ -1,19 +1,19 @@
 require 'pry'
 
- class Transfer	class Transfer
-  # your code here	
-   attr_accessor :amount, :status
+class Transfer
+
+  attr_accessor :amount, :status
   attr_reader :sender, :receiver
 
 
- def initialize(sender, receiver, amount)
+def initialize(sender, receiver, amount)
 @sender = sender
 @receiver = receiver
 @amount = amount
 @status = "pending"
 end
 
- def valid?
+def valid?
   if sender.valid? && receiver.valid?
     return true
   else
@@ -21,7 +21,7 @@ end
   end
 end
 
- def execute_transaction
+def execute_transaction
   if sender.valid? && self.status != "complete" && self.amount < sender.balance
   self.status = "complete" 
   sender.balance -= self.amount
@@ -32,14 +32,12 @@ end
 end
 end
 
- def reverse_transfer
+def reverse_transfer
   if self.status == "complete"
   Transfer.new(receiver, sender, self.amount).execute_transaction
   self.status = "reversed"
 end
 
- end
+end
 
- end	
- end
- 
+end
